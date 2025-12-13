@@ -3,14 +3,15 @@ package com.jackie.devconverge.chatbotworkshop.controller;
 import com.jackie.devconverge.chatbotworkshop.dto.ChatRequest;
 import com.jackie.devconverge.chatbotworkshop.dto.ChatResponse;
 import com.jackie.devconverge.chatbotworkshop.service.ChatService;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
-@RequestMapping("/api/chat")
+@RequestMapping("/api")
 public class ChatController {
 
     private final ChatService chatService;
@@ -19,7 +20,12 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    @PostMapping
+    @GetMapping
+    public String hello() {
+        return "Hello World!";
+    }
+
+    @PostMapping ("/chat")
     public ChatResponse chat(@RequestBody ChatRequest request) {
         String response = chatService.getAnswer(request.message(), request.userId());
 
